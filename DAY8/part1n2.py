@@ -35,6 +35,7 @@ def init():
     fin = swap
     swap = []
     return fin
+
 def main():
     dc = [0]*10
     fs = 0
@@ -49,9 +50,6 @@ def main():
     print(dc)
     print("part 1: " + str(dc[1]+dc[4]+dc[7]+dc[8]))
     print("part 2: " + str(fs))
-
-    
-
 
 if __name__ == "__main__":
     main()
