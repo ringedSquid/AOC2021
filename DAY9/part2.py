@@ -51,10 +51,3 @@ for i in range(len(cn)):
 
 cn = sorted(cn, reverse=True)
 print(cn[0]*cn[1]*cn[2])
-
-        
-
-
-
-
-
