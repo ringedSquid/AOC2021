@@ -1,3 +1,4 @@
+#I had to get "inspiration" 
 def dfs(pd, visited, cnode):
     if cnode == 'end':
         return 1
