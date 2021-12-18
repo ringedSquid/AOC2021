@@ -30,7 +30,4 @@ def main():
     xb, yb = init()
     print(bash(xb, yb))
     
-
-
-
 main()
