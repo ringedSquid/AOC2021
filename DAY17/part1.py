@@ -25,6 +25,4 @@ def main():
     #If only I was cracked at math :(
     print(((-i-1)*-i)//2)
 
-
-
 main()
