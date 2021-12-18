@@ -1,44 +1,32 @@
-def literal(packet):
-    number = ""
-    packet = packet[6:len(packet)]
-    for i in range(len(packet)//5):
-        number += packet[(i*5)+1:(i*5)+5]
+def mov(n, encoded, cpos):
+    cpos += n
+    return int(encoded[cpos-n:cpos], 2), cpos
 
-    number = int(number, 1)
-    return number
-#literal("110100101111111000101000")
-def findsub(encoded):
-    v = int(encoded[0:3], 2)
-    t = int(encoded[3:6], 2)
-    i = int(encoded[7])
-    if v == 4:
-        
-
-    
-def decode(encoded):
-    sm = 0
-    v = int(encoded[0:3], 2)
-    t = int(encoded[3:6], 2)
-    i = int(encoded[7])
-    if v == 4:
-        sm += literal(encoded)
+def decode(encoded, cpos):
+    v, cpos = mov(3, encoded, cpos)
+    t, cpos = mov(3, encoded, cpos)
+    if t == 4:
+        while encoded[cpos] == "1":
+            cpos = mov(5, encoded, cpos)[1]
+        #last set
+        cpos = mov(5, encoded, cpos)[1]
     else:
-        packet = ""
-        packet += v + t + i
-        if i = 0:
-            packet += encoded[8:23]
-            l = int(encoded[8:23], 2)
-            packet += encoded[23:23+l]
-            sm += decode(packet)
-        elif i = 1:
-            l = int(encoded[8:19], 2)
+        i, cpos = mov(1, encoded, cpos)
+        if i == 0:
+            l, cpos = mov(15, encoded, cpos)
+            r = cpos
+            while cpos - r < l:
+                result = decode(encoded, cpos)
+                v += result[0]
+                cpos = result[1]
 
-
-
-
-    
-    
-
+        else:
+            l, cpos = mov(11, encoded, cpos)
+            for y in range(l):
+                result = decode(encoded, cpos)
+                v += result[0]
+                cpos = result[1]
+    return v, cpos
 
 def init():
     table = {
@@ -60,14 +48,17 @@ def init():
             'F':'1111'
             }
     swap = ""
-    fin = open("tnput.txt", "r").read().strip()
+    fin = open("input.txt", "r").read().strip()
+    #fin = input("")
     for i in fin:
         swap += table[i]
     return swap
 
 def main():
     encoded = init()
-    decode(encoded)
+    #print(encoded)
+    print(decode(encoded, 0)[0])
+
     
     
 
